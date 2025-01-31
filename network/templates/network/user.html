@@ -1,0 +1,82 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    <div class="user-container">
+        <div class="user-div">{{ owner.username }}</div>
+        <div class="following-div">
+            Follows: {{ following_count }} {{ following_count|pluralize:"person,people" }}
+        </div>
+        <div class="followed-div">
+            Followers: {{ followed_by_count }} {{ followed_by_count|pluralize:"person,people" }}
+        </div>
+
+        {% if owner != user and user.is_authenticated %}
+            <div class="follow-btn">
+                {% if followed %}
+                    <form action="{% url 'unfollow' owner.username %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-primary" type="submit">Unfollow</button>
+                    </form>
+                {% else %}
+                    <form action="{% url 'follow' owner.username %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-primary" type="submit">Follow</button>
+                    </form>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+
+    {% for post in page_obj %}
+        <div class="post-container">
+            <div class="post-owner">
+                <a href="{% url 'user_page' post.owner %}">
+                    {{ post.owner.username }}
+                </a>
+            </div>
+            {% if user == post.owner %} 
+            <div class="post-edit-div">
+                <a href="#" class="post-edit" id="edit-{{ post.id }}">
+                    Edit
+                </a>
+            </div> 
+            {% endif %}
+            <div class="post-content" id="content-{{ post.id }}">{{ post.content }}</div>
+            <div class="post-date">{{ post.date }}</div>
+            <div class="post-likes-div" id="post-likes-{{ post.id }}">
+                <a href="{% url 'like' post.id %}" class="post-likes" id="likes-{{ post.id }}">
+                    {% if post.is_liked_by_user %}
+                        <img src="{% static 'network/heart.png' %}" alt="Like" style="width:24px;height:24px;">
+                    {% else %}
+                        <img src="{% static 'network/heart1.png' %}" alt="Like" style="width:24px;height:24px;">
+                    {% endif %}
+                </a>
+                <span id="like-count-{{ post.id }}">{{ post.likes_count }}</span>
+            </div>
+            <div class="post-comment">Comment</div>
+        </div>
+    {% empty %}
+        <p>No posts to display.</p>
+    {% endfor %}
+
+    <div class="pagination justify-content-center">
+        <span class="step-links">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a></li>
+                {% endif %}
+
+                {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a></li>
+                {% endif %}
+            </ul>
+        </span>
+    </div>
+    
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'network/edit.js' %} ?{% now 'U' %}"></script>
+{% endblock %}

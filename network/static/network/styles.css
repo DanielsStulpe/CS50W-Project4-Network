@@ -1,0 +1,100 @@
+.page-title {
+    padding-left: 10px;
+    padding-top: 8px;
+}
+
+.post-container {
+    padding: 10px;
+    padding-left: 15px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 2px;
+    border-color: #d3d2d2;
+    margin: 10px;
+}
+
+.post-owner {
+    padding-bottom: 8px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.post-owner > a {
+    color: black;
+}
+
+.post-edit-div {
+    padding-bottom: 6px;
+}
+
+.post-edit {
+    color: rgb(22, 109, 240);
+}
+.post-edit:hover {
+    color: rgb(22, 109, 240);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.post-content {
+    padding-bottom: 4px;
+}
+
+.post-date {
+    color: rgb(158, 158, 158);
+    padding-bottom: 2px;
+}
+
+.post-comment {
+    color: rgb(158, 158, 158);
+}
+
+.user-container {
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-div {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.followed-div {
+    padding-bottom: 5px;
+}
+
+.new-post-div {
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 20px;
+    padding-bottom: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.new-post-title {
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 3px;
+}
+
+.new-post-div textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.edit-textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 14px;
+}
